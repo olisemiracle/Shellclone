@@ -1,6 +1,9 @@
 #include "main.h"
-void _my_exit(char *command)
+void _my_exit(char **argv)
 {
-	if (strcmp(command, "exit") == 0)
-		exit(1);
+	if (argv[1] == NULL)
+	{
+		free(argv);
+		exit(0);
+	}
 }
