@@ -1,17 +1,17 @@
 #include "main.h"
-void check_built_in(char *command)
+void check_built_in(char **argv)
 {
 	int i, len;
 	built_in list[] = {
 		{"env", _env},
-		{"exit", exiti}
+		{"exit", _my_exit}
 	};
 
-	len = strlen(command);
+	len = strlen(argv[0]);
 	
 	for (i = 0; i < 2; i++)
 	{
-		if (strncmp(command, list[i].command, len) == 0)
+		if (strncmp(argv[0], list[i].command, len) == 0)
 			list[i].f();
 	}
 }

@@ -13,9 +13,7 @@ int main(int argc, char **argv)
 		argv = prompt();	
 		command = argv[0];
 
-//		_my_exit(command);  /* exit the function with exit */
-		//_env(command);
-		 check_built_in(command);
+		check_built_in(argv);
 		w_value =_which(command);
 		if (w_value == NULL)
 		{
