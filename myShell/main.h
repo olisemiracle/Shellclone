@@ -11,5 +11,12 @@ char *_which(char *command);
 void execute_cmd(char **argv, char *full_path);
 char **prompt();
 int _fork(char **argv, char *w_value);
-void _my_exit(char *command);
+void exiti(char *command);
+void _env(char *command);
+void check_built_in(char *command);
+typedef struct builtin_commands
+{
+	char *command;
+	void (*f)();
+}built_in;
 #endif
