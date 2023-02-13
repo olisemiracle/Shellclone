@@ -1,15 +1,12 @@
 #include "main.h"
 int main(int argc, char **argv)
 {
-	ssize_t g_value;
-	size_t n = 0;
-	int i = 0, token_num = 0;
-	char *buffer = NULL, *buffer_copy = NULL, *token, *command, *w_value; 
-	const char *delimiter = " \n";
-	pid_t f_value;
+	char *command, *w_value;
+	(void)argc;
 
 	while (1)
 	{
+		printf("($) ");
 		argv = prompt();	
 		command = argv[0];
 
@@ -20,9 +17,7 @@ int main(int argc, char **argv)
 			perror("Error");
 			continue;
 		}
-		 f_value = _fork(argv, w_value);
-		 if (f_value == 1)
-			 continue;
+		 _fork(argv, w_value);
 
 		free(argv);
 	}

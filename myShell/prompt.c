@@ -8,21 +8,22 @@ char **prompt()
 	const char *delimiter = " \n";
 	char **argv;
 
-	printf("($) ");  /*prompt*/
-	g_value = getline(&buffer, &n, stdin);    /*getting input*/
+	g_value = _getline(&buffer, &n);    /*getting input*/
 	if (g_value == -1)
 		{
 			printf("\n");
-			//return(NULL);
 			exit(1);
 		}
-		
-		// Allocate memory for buffer_copy and copy buffer into it
+		// Allocate memory for buffer_copy and copy buffer into it 
 		buffer_copy = malloc(sizeof(char) * g_value);
 		if (buffer_copy == NULL)
 		{
 			perror("hsh: Memory allocation for buffer copy failed");
-		//	return (NULL);
+			exit(1);
+		}
+		if (buffer == NULL)
+		{
+			printf("buffer contains NULL");
 			exit(1);
 		}
 		strcpy(buffer_copy, buffer);
@@ -37,15 +38,19 @@ char **prompt()
 		}
 		token_num++;
 
-		// Allocate memory for number of strings
-		argv = malloc(sizeof(char *) * token_num); /*check for malloc error*/
+		// Allocate memory for number of strings 
+		argv = malloc(sizeof(char *) * token_num);
+		if (argv == NULL)
+			exit(1);
 
-		// Get the lenth of each string, allocate memory to store the string, then copy each string into argv 
+		//Get the lenth of eacch string, allocate memory to store the string, then copy each string into argv
 		token = strtok(buffer_copy, delimiter);
 		while (token)
 		{
 			len = strlen(token);
-			argv[i] = malloc(sizeof(char) * len); /*check for malloc error*/
+			argv[i] = malloc(sizeof(char) * len); 
+			if (argv[i] == NULL)
+				exit(1);
 			strcpy(argv[i], token);
 			token = strtok(NULL, delimiter);
 			i++;

@@ -1,5 +1,5 @@
 #include "main.h"
-int _fork(char **argv, char *w_value)
+void _fork(char **argv, char *w_value)
 {
 	pid_t f_value;
 
@@ -16,5 +16,4 @@ int _fork(char **argv, char *w_value)
 	{
 		wait(NULL);
 	}
-
 }
