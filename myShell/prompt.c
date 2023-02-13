@@ -1,14 +1,14 @@
 #include "main.h"
 char **prompt()
 {
-	ssize_t g_value;
+	static ssize_t g_value = 0;
 	size_t n = 0;
 	int i = 0, token_num = 0, len;
-	char *buffer = NULL, *buffer_copy = NULL, *token; 
+	char *buffer_copy = NULL, *token; 
 	const char *delimiter = " \n";
 	char **argv;
 
-	g_value = _getline(&buffer, &n);    /*getting input*/
+	g_value = getline(&buffer, &n, stdin);    /*getting input*/
 	if (g_value == -1)
 		{
 			printf("\n");
@@ -23,7 +23,7 @@ char **prompt()
 		}
 		if (buffer == NULL)
 		{
-			printf("buffer contains NULL");
+			printf("buffer contains NULL\n");
 			exit(1);
 		}
 		strcpy(buffer_copy, buffer);
