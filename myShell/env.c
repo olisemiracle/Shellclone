@@ -1,7 +1,6 @@
 #include "main.h"
 void _env(char **argv)
 {
-	extern char **environ;
 	int i;
 
 	if (argv[1] == NULL)

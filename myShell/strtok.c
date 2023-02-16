@@ -1,64 +1,95 @@
 #include "main.h"
 char **_strtok(var_t *var, ssize_t g_value)
 {
-	int i = 0, token_num = 0, len;
-	char *buffer_copy = NULL, *token; 
-	const char *delimiter = " \n";
-	char **argv;
-	char *buffer;
-
-        
+	int i = 0, token_num, len;
+	char *delimiter = "\n\t \r\a";
+	char **argv, *buffer, *token, *buffer2;
 
 	if (g_value == -1)
+	{
+		printf("\n");
+		exit(1);
+	}
+	buffer2 = NULL;
+	buffer = malloc(sizeof(char) * g_value);
+	if (buffer == NULL)
+		exit(1);
+	strcpy(buffer, var->str);
+	token_num = token_count(buffer);
+	argv = malloc(sizeof(char *) * (token_num + 1));
+	if (argv == NULL)
+	{
+		exit(1);
+	}
+	token = parse(buffer, delimiter, &buffer2);
+	while (token)
+	{
+		len = strlen(token);
+		argv[i] = malloc(sizeof(char) * len + 1);
+		if (argv[i] == NULL)
 		{
-			printf("\n");
 			exit(1);
 		}
-	buffer = var->str;
-		// Allocate memory for buffer_copy and copy buffer into it 
-		buffer_copy = malloc(sizeof(char) * g_value + 1);
-		if (buffer_copy == NULL)
-		{
-			perror("hsh: Memory allocation for buffer copy failed");
-			exit(1);
-		}
-		strcpy(buffer_copy, buffer);
+		strcpy(argv[i], token);
+		token = parse(NULL, delimiter, &buffer2);
+		i++;
+	}
+	argv[i] = NULL;
+	return (argv);
+}
+int token_count(char *str)
+{
+	int wc, state, i;
 
-		// calculate the number of tokens in buffer
-		token = strtok(buffer, delimiter);
-
-		while (token)
+	i = wc = 0;
+	state = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\0' || str[i] == '\n' || str[i] == '\t' || str[i] == ' ')
 		{
-			token_num++;
-			token = strtok(NULL, delimiter);
-		}
-		token_num++;
-
-		// Allocate memory for number of strings 
-		argv = malloc(sizeof(char *) * token_num);
-		if (argv == NULL)
-		{
-			printf("FRom here");
-			exit(1);
-		}
-
-		//Get the lenth of eacch string, allocate memory to store the string, then copy each string into argv
-		token = strtok(buffer_copy, delimiter);
-		while (token)
-		{
-			len = strlen(token);
-			argv[i] = malloc(sizeof(char) * len); 
-			if (argv[i] == NULL)
+			if (state == 1)
 			{
-				exit(1);
+				state = 0;
+				wc++;
 			}
-			strcpy(argv[i], token);
-			token = strtok(NULL, delimiter);
+			else
+				break;
 			i++;
 		}
-		argv[i] = NULL;
+		else
+		{
+			state = 1;
+			i++;
+		}
+	}
+	return (wc);
+}
+char *parse(char *input, const char *delim, char **saveptr)
+{
+	char *token;
+	int i;
 
-		free(buffer_copy);
-
-		return argv;	
+	i = 0;
+	if (input == NULL)
+		input = *saveptr;
+	input += strspn(input, delim);
+	if (*input == '\0')
+	{
+		*saveptr = input;
+		return (NULL);
+	}
+	token = input;
+	input = _strpbrk(input, delim);
+	if (input == NULL)
+	{
+		while (token[i] != '\0')
+			i++;
+		*saveptr = token + i;
+	}
+	else
+	{
+		*input = '\0';
+		*saveptr = input + 1;
+	}
+	return (token);
 }
