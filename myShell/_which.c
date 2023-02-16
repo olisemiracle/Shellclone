@@ -14,7 +14,9 @@ char *_which(char * command)
 	path = getenv("PATH");
 	if (path != NULL)
 	{
-		path_copy = malloc(sizeof(char) * strlen(path)); /* create a copy of path */
+		path_copy = malloc(sizeof(char) * strlen(path));/* create a copy of path */
+		if (path_copy == NULL)
+			return (NULL);
 		strcpy(path_copy, path);
 
 		com_len =strlen(command); /*length of command*/
