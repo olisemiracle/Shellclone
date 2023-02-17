@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdio.h>
-
 /**
  * _strlen - length of string
  * @s: variable
@@ -17,8 +15,6 @@ int _strlen(char *s)
 	}
 	return (value);
 }
-#include "main.h"
-
 /**
  * _strpbrk - searches string
  * @s: pointer
@@ -44,9 +40,6 @@ char *_strpbrk(char *s, char *accept)
 	}
 	return ('\0');
 }
-#include "main.h"
-#include <stdio.h>
-
 /**
  *_strcpy - copies from one pointer
 * @dest: point
@@ -66,8 +59,6 @@ char *_strcpy(char *dest, char *src)
 	dest[b] = '\0';
 	return (dest);
 }
-#include "main.h"
-
 /**
  * _strncpy - concatenate string
  * @dest: pointer
@@ -88,7 +79,6 @@ char *_strncpy(char *dest, char *src, int n)
 	}
 		return (dest);
 }
-#include "main.h"
 
 /**
  * _strcmp - compares strings
