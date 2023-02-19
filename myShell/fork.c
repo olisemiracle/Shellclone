@@ -1,4 +1,9 @@
 #include "main.h"
+/**
+ * _fork - process that spaws the child and parent processes
+ * @argv: name of aegumwnt
+ *@w_value: variaable to store the fork process
+ */
 void _fork(char **argv, char *w_value)
 {
 	pid_t f_value;

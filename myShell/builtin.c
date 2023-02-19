@@ -1,4 +1,9 @@
 #include "main.h"
+/**
+ * _my_exit - funtion to control exit
+ * @argv: number of variable required
+ */
+
 void _my_exit(char **argv)
 {
 	int num;

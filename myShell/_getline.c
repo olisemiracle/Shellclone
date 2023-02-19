@@ -1,42 +1,64 @@
 #include "main.h"
+/**
+ * _getline - function for get line
+ * @var: variable
+ * Return: variable
+ */
+
 ssize_t _getline(var_t *var)
 {
 	static char *buffer;
-	static size_t len = 0;
+	static size_t len;
 	ssize_t r;
 	char **buf_store = &(var->str);
 	char *p;
 
 	r = enter_buffer(var, &buffer, &len);
 	if (r == -1)
-		return(-1);
+		return (-1);
 	*buf_store = buffer;
 	return (r);
 }
+/**
+ * enter_buffer - bufffer to cintain string
+ * @ptr_buffer: address of buffer
+ * @len: length of buffer
+ * @var: variable
+ * Return: buffer
+ */
 ssize_t enter_buffer(var_t *var, char **ptr_buffer, size_t *len)
 {
 	ssize_t r;
 	size_t length = 0;
-	
+
 	if (*len == 0)
 	{
 		*ptr_buffer = NULL;
 		r = my_getline(var, ptr_buffer, &length);
-	/*	if (r > 0);
+	/**
+	 * if (r > 0);
 		{
 			if ((*ptr_buffer)[r - 1] == '\n')
 			{
 				(*ptr_buffer)[r - 1] = '\0';
 				r--;
 			}
-		}*/
+		}
+		*/
 	}
 	return (r);
 }
+/**
+ * my_getline - shell getlin function
+ * @ptr_buffer:pointer to buffer
+ * @length:SIZE
+ * @var:variable
+ * Return:my getline
+ */
 ssize_t my_getline(var_t *var, char **ptr_buffer, size_t *length)
 {
 	static char buf[BUFFER_SIZE];
-	static size_t len, i = 0;
+	static size_t len, i;
 	size_t len1;
 	ssize_t r = 0, oldsize;
 	char *str = NULL, *str2 = NULL, *string;

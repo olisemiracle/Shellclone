@@ -1,5 +1,7 @@
 #ifndef SHELL
 #define SHELL
+
+
 /*prototypes for headers*/
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,16 +13,22 @@
 
 /*external variable*/
 extern char **environ;
+/**
+ * list_of_variables - struct for the variabkes passed into strtok
+ * @str: string variable
+ * fd: variable
+ */
+
 
 /*struct for recurrin variable for strtok*/
-typedef struct list_of_variables
+typedef struct(list_of_variables)
 {
 	char *str;
 	int fd;
-}var_t;
+} var_t;
 
 /*prototype for*/
-static char *buffer = NULL;
+static char (*buffer = NULL);
 
 /*prototype for which*/
 char *_which(char *command);
@@ -51,7 +59,7 @@ char *_strcpy(char *dest, char *src);
 int _strlen(char *s);
 char *_strncpy(char *dest, char *src, int n);
 int _strcmp(char *s1, char *s2);
-char *_strcat(char *dest, char *src)
+char *_strcat(char *dest, char *src);
 
 /*prototype for loop*/
 void loop(var_t *var);
@@ -61,12 +69,18 @@ char **_strtok(var_t *var, ssize_t g_value);
 int token_count(char *str);
 char *parse(char *input, const char *delim, char **saveptr);
 
+/**
+ * builtin_commands - struct for builtin commands
+ * @command: commands that are inbuilt
+ * @f:function to pointer
+ */
+
 /*struct for buitin*/
-typedef struct builtin_commands
+typedef struct(builtin_commands)
 {
 	char *command;
 	void (*f)();
-}built_in;
+} built_in;
 
 
 #define VAR_INITIALIZE \

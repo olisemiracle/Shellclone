@@ -1,4 +1,10 @@
 #include "main.h"
+/**
+ *_strtok - tokenizes the strings
+ * @var: signed int for pointer to file
+ * @g_value: value of string
+ * Return: returns token
+ */
 char **_strtok(var_t *var, ssize_t g_value)
 {
 	int i = 0, token_num, len;
@@ -37,6 +43,11 @@ char **_strtok(var_t *var, ssize_t g_value)
 	argv[i] = NULL;
 	return (argv);
 }
+/**
+ * token_count -keeps track of the token
+ * @str: STRING
+ * Return: string
+ */
 int token_count(char *str)
 {
 	int wc, state, i;
@@ -64,6 +75,13 @@ int token_count(char *str)
 	}
 	return (wc);
 }
+/**
+ * parse - character or variable to be parsed
+ * @input: what is typed
+ * @delim: what is used to separate the strings
+ * @saveptr: address to address of strings
+ *Return: token
+ */
 char *parse(char *input, const char *delim, char **saveptr)
 {
 	char *token;

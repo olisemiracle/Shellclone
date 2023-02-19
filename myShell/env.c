@@ -1,4 +1,8 @@
 #include "main.h"
+/**
+ * _env -to initialize the environment
+ * @argv: the number of arguments passed is more than the program name
+ */
 void _env(char **argv)
 {
 	int i;
